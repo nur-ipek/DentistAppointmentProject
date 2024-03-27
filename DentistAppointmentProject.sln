@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C31295DE-2BFF-4C88-A22B-BAEFAC815A03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2C125C6E-DF63-4EB0-BCC2-22607BEDB0E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{E87A5803-425F-42C0-B5FA-0430684FA0DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{533E0783-CBA7-47CA-AC0D-912CAFAE89DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentistAppointmentProject.Domain", "src\Core\DentistAppointmentProject.Domain\DentistAppointmentProject.Domain.csproj", "{E63FF973-6A62-4FBD-9E8A-5FC3C97D40B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentistAppointmentProject.Application", "src\Core\DentistAppointmentProject.Application\DentistAppointmentProject.Application.csproj", "{CD2D4DD3-1634-48AA-A141-FC0A04A45842}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentistAppointmentProject.Persistence", "src\Infrastructure\DentistAppointmentProject.Persistence\DentistAppointmentProject.Persistence.csproj", "{588A04B2-7816-48C6-816A-2F9965EDFF4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentistAppointmentProject.WebUI", "src\WebUI\DentistAppointmentProject.WebUI\DentistAppointmentProject.WebUI.csproj", "{CC804DA3-74D2-4668-9A0F-52FFA4B1A32E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E63FF973-6A62-4FBD-9E8A-5FC3C97D40B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E63FF973-6A62-4FBD-9E8A-5FC3C97D40B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E63FF973-6A62-4FBD-9E8A-5FC3C97D40B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E63FF973-6A62-4FBD-9E8A-5FC3C97D40B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD2D4DD3-1634-48AA-A141-FC0A04A45842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD2D4DD3-1634-48AA-A141-FC0A04A45842}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD2D4DD3-1634-48AA-A141-FC0A04A45842}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD2D4DD3-1634-48AA-A141-FC0A04A45842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{588A04B2-7816-48C6-816A-2F9965EDFF4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{588A04B2-7816-48C6-816A-2F9965EDFF4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{588A04B2-7816-48C6-816A-2F9965EDFF4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{588A04B2-7816-48C6-816A-2F9965EDFF4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC804DA3-74D2-4668-9A0F-52FFA4B1A32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC804DA3-74D2-4668-9A0F-52FFA4B1A32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC804DA3-74D2-4668-9A0F-52FFA4B1A32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC804DA3-74D2-4668-9A0F-52FFA4B1A32E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2C125C6E-DF63-4EB0-BCC2-22607BEDB0E1} = {C31295DE-2BFF-4C88-A22B-BAEFAC815A03}
+		{E87A5803-425F-42C0-B5FA-0430684FA0DC} = {C31295DE-2BFF-4C88-A22B-BAEFAC815A03}
+		{533E0783-CBA7-47CA-AC0D-912CAFAE89DD} = {C31295DE-2BFF-4C88-A22B-BAEFAC815A03}
+		{E63FF973-6A62-4FBD-9E8A-5FC3C97D40B8} = {2C125C6E-DF63-4EB0-BCC2-22607BEDB0E1}
+		{CD2D4DD3-1634-48AA-A141-FC0A04A45842} = {2C125C6E-DF63-4EB0-BCC2-22607BEDB0E1}
+		{588A04B2-7816-48C6-816A-2F9965EDFF4B} = {E87A5803-425F-42C0-B5FA-0430684FA0DC}
+		{CC804DA3-74D2-4668-9A0F-52FFA4B1A32E} = {533E0783-CBA7-47CA-AC0D-912CAFAE89DD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {06CCBC9B-A12B-468A-A835-DD6440429AD6}
+	EndGlobalSection
+EndGlobal
