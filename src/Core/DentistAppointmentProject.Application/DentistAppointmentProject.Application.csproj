@@ -15,4 +15,8 @@
     <Folder Include="Mapping\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DentistAppointmentProject.Domain\DentistAppointmentProject.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

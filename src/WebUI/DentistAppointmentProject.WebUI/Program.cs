@@ -1,7 +1,15 @@
+using DentistAppointmentProject.Domain.Entities.Authentication;
+using DentistAppointmentProject.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDbContext>(_ => _.UseSqlServer(builder.Configuration["ConnectionStrings:SqlServerConnectionString"]));
+builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<AppDbContext>();
+
 
 var app = builder.Build();
 
@@ -18,6 +26,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); //metodu sayesinde uygulamanýn identity ile kimlik doðrulamasý gerçekleþtireceðini belirtmiþ bulunmaktayýz.
 app.UseAuthorization();
 
 app.MapControllerRoute(
