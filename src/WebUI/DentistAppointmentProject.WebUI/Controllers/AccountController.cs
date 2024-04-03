@@ -1,7 +1,9 @@
 ﻿using DentistAppointmentProject.Application.Dtos.Request.Account.Register;
 using DentistAppointmentProject.Application.Interfaces.Services;
+using DentistAppointmentProject.Persistence.Services;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace DentistAppointmentProject.WebUI.Controllers
 {
@@ -18,16 +20,24 @@ namespace DentistAppointmentProject.WebUI.Controllers
         }
         public async Task<IActionResult> Register()
         {
-            RegisterRequestModel registerRequestModel = new RegisterRequestModel()
-            {
-                Username = "Nipeeek",
-                Email = "nur.ipek.tiryaki@gmail.com",
-                Password = "PAsWoRd.34"
-            };
-            await _accountService.RegisterUser(registerRequestModel);
+            //RegisterRequestModel registerRequestModel = new RegisterRequestModel()
+            //{
+            //    Username = "Tahsin",
+            //    Email = "tahsin.tiryaki@gmail.com",
+            //    Password = "PAsWoRd.34"
+            //};
+            //await _accountService.RegisterUser(registerRequestModel);
           
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Register (RegisterRequestModel registerRequestModel)
+        {
+            await _accountService.RegisterUser(registerRequestModel);
+            return RedirectToAction("Index");   
+        }
+
         //[HttpPost]
         //public IActionResult (LoginViewModel model)
         //{

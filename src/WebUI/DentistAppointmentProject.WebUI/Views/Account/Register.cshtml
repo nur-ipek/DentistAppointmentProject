@@ -46,3 +46,39 @@
     </div>
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#registerButton').click(function () {
+            var username = $('#username').val();
+            var email = $('#email').val();
+            var password = $('#password').val();
+            var confirmPassword = $('#confirm_password').val();
+
+            var data = {
+                Username: username,
+                Email: email,
+                Password: password,
+                ConfirmPassword: confirmPassword
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Account/Register",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    alert('Kullanıcı başarıyla kaydedildi!');
+                    // Başka bir sayfaya yönlendirme veya başka bir işlem yapabilirsiniz
+                },
+                error: function (xhr, status, error) {
+                    alert('Kullanıcı kaydedilirken bir hata oluştu: ' + error);
+                }
+            });
+        });
+    });
+
+
+
+</script>

@@ -15,22 +15,37 @@ namespace DentistAppointmentProject.Persistence.Repositories
     public class AccountRepository : GenericRepository<User>, IAccountRepository
     {
         private readonly UserManager<User> _userManager;
-       
-        public AccountRepository(AppDbContext dbContext, UserManager<User> userManager) : base(dbContext)
+        private readonly RoleManager<Role> _roleManager;
+        public AccountRepository(AppDbContext dbContext, UserManager<User> userManager, RoleManager<Role> roleManager) : base(dbContext)
         {
             _userManager= userManager;
+            _roleManager = roleManager;
              
         }
 
         public async Task<bool> RegisterUser(RegisterRequestModel model)
         {
+                  
             try
             {
+                //RoleManager
+                bool patientRole = _roleManager.Roles.Where(x => x.Name == "Patient").Any();
+                IdentityResult roleResult = new IdentityResult();
+                if (!patientRole)
+                {
+                    roleResult = await _roleManager.CreateAsync(new Role
+                    {
+                        Name = "Patient"
+                    });
+                }
+
+                //UserManager
                 var user = new User { UserName = model.Username, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
-
+                
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Patient");
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     return true;
                 }
