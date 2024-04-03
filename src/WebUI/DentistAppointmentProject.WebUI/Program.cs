@@ -1,5 +1,6 @@
 using DentistAppointmentProject.Domain.Entities.Authentication;
 using DentistAppointmentProject.Persistence.Context;
+using DentistAppointmentProject.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(_ => _.UseSqlServer(builder.Configuration["ConnectionStrings:SqlServerConnectionString"]));
 builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<AppDbContext>();
 
-
+builder.Services.AddPersistenceServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
