@@ -9,7 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(_ => _.UseSqlServer(builder.Configuration["ConnectionStrings:SqlServerConnectionString"]));
-builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<AppDbContext>();
+//builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<AppDbContext>();
+
+
+builder.Services.AddIdentity<User, Role>(_ =>
+{
+    _.Password.RequiredLength = 5; //En az kaç karakterli olmasý gerektiðini belirtiyoruz.
+    _.Password.RequireNonAlphanumeric = false; //Alfanumerik zorunluluðunu kaldýrýyoruz.
+    _.Password.RequireLowercase = false; //Küçük harf zorunluluðunu kaldýrýyoruz.
+    _.Password.RequireUppercase = false; //Büyük harf zorunluluðunu kaldýrýyoruz.
+    _.Password.RequireDigit = false; //0-9 arasý sayýsal karakter zorunluluðunu kaldýrýyoruz.
+}).AddEntityFrameworkStores<AppDbContext>();
+
 
 builder.Services.AddPersistenceServices();
 var app = builder.Build();

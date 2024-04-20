@@ -39,16 +39,24 @@ namespace DentistAppointmentProject.Persistence.Repositories
                     });
                 }
 
-                //UserManager
-                var user = new User { UserName = model.Username, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
                 
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, "Patient");
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
-                    return true;
-                }
+                    //UserManager
+                    var user = new User { UserName = model.Username, Email = model.Email };
+
+                    var result = await _userManager.CreateAsync(user, model.Password); //kayıt işlemi gerçekleştiriliyor.
+
+                    if (result.Succeeded) //başarılı ise kullanıcıya yönlendirme yapılacak.
+                    {
+                        await _userManager.AddToRoleAsync(user, "Patient");
+                        //await _signInManager.SignInAsync(user, isPersistent: false);
+                        return true;
+                    }
+                    else
+                    {
+                        //return result.Errors.ToList();
+                    }
+                
+                  
             }
             catch (Exception ex)
             {
