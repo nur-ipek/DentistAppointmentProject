@@ -1,4 +1,5 @@
-﻿using DentistAppointmentProject.Application.Dtos.Request.Account.Register;
+﻿using DentistAppointmentProject.Application.Dtos.Common;
+using DentistAppointmentProject.Application.Dtos.Request.Account.Register;
 using DentistAppointmentProject.Domain.Entities.Authentication;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace DentistAppointmentProject.Application.Interfaces.Repositories
 {
     public interface IAccountRepository:IGenericRepository<User>
     {
-        Task<bool> RegisterUser(RegisterRequestModel model);
+        Task<BaseResponseModel<NoContent>> RegisterUser(RegisterRequestModel model);
     }
 }

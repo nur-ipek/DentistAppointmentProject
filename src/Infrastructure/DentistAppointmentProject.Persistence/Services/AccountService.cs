@@ -1,4 +1,5 @@
-﻿using DentistAppointmentProject.Application.Dtos.Request.Account.Register;
+﻿using DentistAppointmentProject.Application.Dtos.Common;
+using DentistAppointmentProject.Application.Dtos.Request.Account.Register;
 using DentistAppointmentProject.Application.Interfaces.Repositories;
 using DentistAppointmentProject.Application.Interfaces.Services;
 using DentistAppointmentProject.Persistence.Repositories;
@@ -18,7 +19,7 @@ namespace DentistAppointmentProject.Persistence.Services
         {
             _accountRepository = accountRepository;
         }
-        public async Task<bool> RegisterUser(RegisterRequestModel model)
+        public async Task<BaseResponseModel<NoContent>> RegisterUser(RegisterRequestModel model)
         {
             //TC, email kontrolleri burada.  
             return await _accountRepository.RegisterUser(model);

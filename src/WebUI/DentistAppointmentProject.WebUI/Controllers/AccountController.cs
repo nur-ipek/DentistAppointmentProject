@@ -27,15 +27,25 @@ namespace DentistAppointmentProject.WebUI.Controllers
             //    Password = "PAsWoRd.34"
             //};
             //await _accountService.RegisterUser(registerRequestModel);
-          
+
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register (RegisterRequestModel registerRequestModel)
+        public async Task<JsonResult> Register(RegisterRequestModel registerRequestModel)
         {
-            await _accountService.RegisterUser(registerRequestModel);
-            return RedirectToAction("Index");   
+            var response = await _accountService.RegisterUser(registerRequestModel);
+            if (response.Result)
+            {
+
+
+                return Json(new { failed = false, message = response.Message }) ;
+            }
+            else
+            {
+                return Json(new {failed=true, message = response.ErrorList.FirstOrDefault() });
+
+            }
         }
 
         //[HttpPost]

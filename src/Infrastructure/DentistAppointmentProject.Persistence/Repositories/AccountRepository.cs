@@ -1,4 +1,5 @@
-﻿using DentistAppointmentProject.Application.Dtos.Request.Account.Register;
+﻿using DentistAppointmentProject.Application.Dtos.Common;
+using DentistAppointmentProject.Application.Dtos.Request.Account.Register;
 using DentistAppointmentProject.Application.Interfaces.Repositories;
 using DentistAppointmentProject.Domain.Entities.Authentication;
 using DentistAppointmentProject.Persistence.Context;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,16 +20,18 @@ namespace DentistAppointmentProject.Persistence.Repositories
         private readonly RoleManager<Role> _roleManager;
         public AccountRepository(AppDbContext dbContext, UserManager<User> userManager, RoleManager<Role> roleManager) : base(dbContext)
         {
-            _userManager= userManager;
+            _userManager = userManager;
             _roleManager = roleManager;
-             
+
         }
 
-        public async Task<bool> RegisterUser(RegisterRequestModel model)
+        public async Task<BaseResponseModel<NoContent>> RegisterUser(RegisterRequestModel model)
         {
-                  
+
+            BaseResponseModel<NoContent> responseModel = new BaseResponseModel<NoContent>();
             try
             {
+
                 //RoleManager
                 bool patientRole = _roleManager.Roles.Where(x => x.Name == "Patient").Any();
                 IdentityResult roleResult = new IdentityResult();
@@ -39,33 +43,39 @@ namespace DentistAppointmentProject.Persistence.Repositories
                     });
                 }
 
-                
-                    //UserManager
-                    var user = new User { UserName = model.Username, Email = model.Email };
 
-                    var result = await _userManager.CreateAsync(user, model.Password); //kayıt işlemi gerçekleştiriliyor.
+                //UserManager
+                var user = new User { UserName = model.Username, Email = model.Email };
 
-                    if (result.Succeeded) //başarılı ise kullanıcıya yönlendirme yapılacak.
-                    {
-                        await _userManager.AddToRoleAsync(user, "Patient");
-                        //await _signInManager.SignInAsync(user, isPersistent: false);
-                        return true;
-                    }
-                    else
-                    {
-                        //return result.Errors.ToList();
-                    }
-                
-                  
+                var result = await _userManager.CreateAsync(user, model.Password); //kayıt işlemi gerçekleştiriliyor.
+
+                if (result.Succeeded) //başarılı ise kullanıcıya yönlendirme yapılacak.
+                {
+                    await _userManager.AddToRoleAsync(user, "Patient");
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    responseModel.Result = true;
+                    responseModel.Message = "Kullanıcı kaydı başarılı";
+
+                }
+                else
+                {
+                    responseModel.ErrorList = result.Errors.Select(t => t.Description).ToList();
+                    responseModel.Result = false;
+                    responseModel.Message = "Hata ile karşılaşıldı.";
+                }
+
+
             }
             catch (Exception ex)
             {
-
-                throw;
+                responseModel.ErrorList = new List<string> { ex.Message };
+                responseModel.Result = false;
+                responseModel.Message = "Hata ile karşılaşıldı.";
+               
             }
-            
 
-            return false;
+
+            return responseModel;
         }
     }
 }
